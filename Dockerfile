@@ -18,16 +18,20 @@ RUN useradd vcmi --home /vcmi --create-home \
 # Download and unpack H3 mac demo and VCMI assets
 RUN cd /vcmi \
  && wget http://vcmi.arseniyshestakov.com/demo/heroes_3_complete_demo.sit \
+ && wget http://vcmi.arseniyshestakov.com/docker/Maps.zip \
  && wget http://vcmi.arseniyshestakov.com/docker/Mods.zip \
  && wget http://vcmi.arseniyshestakov.com/docker/modSettings.json \
  && unar /vcmi/heroes_3_complete_demo.sit \
  && unzip /vcmi/Mods.zip \
+ && unzip /vcmi/Maps.zip \
  && mv "/vcmi/Heroes III Demo/data/" "/vcmi/.local/share/vcmi/Data" \
  && mv "/vcmi/Mods" "/vcmi/.local/share/vcmi/" \
+ && mv "/vcmi/Maps" "/vcmi/.local/share/vcmi/" \
  && mv "/vcmi/modSettings.json" "/vcmi/.config/vcmi/" \
  && rm -rf "/vcmi/Heroes III Demo/" \
  && rm -f "/vcmi/heroes_3_complete_demo.sit" \
- && rm -f "/vcmi/Mods.zip"
+ && rm -f "/vcmi/Mods.zip" \
+ && rm -f "/vcmi/Maps.zip"
 
 COPY run.sh /vcmi/run.sh
 RUN chmod +x /vcmi/run.sh
